@@ -1,0 +1,23 @@
+{
+  "name": "constructorjs",
+  "version": "0.0.1",
+  "description": "A JS/HTML5 implementation of Soda Co UK's Constructor application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edj-boston/constructor.git"
+  },
+  "keywords": [
+    "Constructor",
+    "Soda"
+  ],
+  "author": "Eric Johnson <edj.boston@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edj-boston/constructor/issues"
+  },
+  "homepage": "https://github.com/edj-boston/constructor"
+}
