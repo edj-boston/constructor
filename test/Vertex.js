@@ -41,4 +41,28 @@ describe('Vertex', function() {
 		}).should.throw('Numeric y velocity is required');
 	});
 
+	describe('#free()', function() {
+
+		it('should change the type to free and create velocities', function() {
+			var v = new Vertex(uuid.v4(), 'fixed', 0, 0);
+			v.free(0, 0);
+			v.type.should.equal('free');
+			should.exist(v.vx);
+			should.exist(v.vy);
+		});
+
+	});
+
+	describe('#fix()', function() {
+
+		it('should change the type to fixed and destroy velocities', function() {
+			var v = new Vertex(uuid.v4(), 'free', 0, 0, 0, 0);
+			v.fix();
+			v.type.should.equal('fixed');
+			should.not.exist(v.vx);
+			should.not.exist(v.vy);
+		});
+
+	});
+
 });
