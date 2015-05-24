@@ -2,14 +2,7 @@ var uuid = require('uuid'),
 	validateUUID = require('../../lib/validateUUID.js');
 
 
-var Vertex = function(id, type, x, y, vx, vy) {
-
-	// Validate the id
-	if( validateUUID(id) ) {
-		this.id = id;
-	} else {
-		throw new Error('The id must be a valid type 4 UUID');
-	}
+var Vertex = function(type, x, y, vx, vy) {
 
 	// Validate the type
 	if( type == 'free' || type == 'fixed' ) {

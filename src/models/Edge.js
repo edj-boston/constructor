@@ -2,14 +2,7 @@ var uuid = require('uuid'),
 	validateUUID = require('../../lib/validateUUID.js');
 
 
-var Edge = function(id, type, a, b, length, amplitude, phase) {
-
-	// Validate the id
-	if( validateUUID(id) ) {
-		this.id = id;
-	} else {
-		throw new Error('`id` must be a valid type 4 UUID');
-	}
+var Edge = function(type, a, b, length, amplitude, phase) {
 
 	// Validate the type
 	if( type == 'muscle' || type == 'spring' ) {
