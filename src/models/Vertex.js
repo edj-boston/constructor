@@ -1,7 +1,3 @@
-var uuid = require('uuid'),
-	validateUUID = require('../../lib/validateUUID.js');
-
-
 var Vertex = function(type, x, y, vx, vy) {
 	this.type = type;
 	this.x = x;
