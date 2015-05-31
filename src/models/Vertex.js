@@ -14,21 +14,21 @@ var Vertex = function(type, x, y, vx, vy) {
 Vertex.prototype.validate = function() {
 
 	// Validate the type
-	if( this.type != 'free' && this.type != 'fixed' ) throw new Error('Invalid type');
+	if( this.type != 'free' && this.type != 'fixed' ) throw new Error('Invalid `type`');
 
 	// Validate the x coordinate
-	if( typeof this.x != 'number' ) throw new Error('x must be a numeric value');
+	if( typeof this.x != 'number' ) throw new Error('`x` must be a number');
 
 	// Validate the y coordinate
-	if( typeof this.y != 'number' ) throw new Error('y must be a numeric value');
+	if( typeof this.y != 'number' ) throw new Error('`y` must be a number');
 
 	// Check the velocities if the vertex is free
 	if( this.type == 'free' ) {
 		if( typeof this.vx != 'number' ) {
-			throw new Error('Numeric x velocity is required');
+			throw new Error('`vx` must be a number');
 		}
 		if( typeof this.vy != 'number' ) {
-			throw new Error('Numeric y velocity is required');
+			throw new Error('`vy` must be a number');
 		}
 	}
 

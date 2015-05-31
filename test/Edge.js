@@ -5,45 +5,45 @@ var should = require('should'),
 
 describe('Edge', function() {
 
-	it('should thow an error for an invalid type', function() {
+	it('`type` must be a certain string', function() {
 		(function() {
 			var e = new Edge(null);
-		}).should.throw('Invalid type');
+		}).should.throw('Invalid `type`');
 	});
 
-	it('should cause an error if the first vertex id is invalid', function() {
+	it('`a` must be a type 4 UUID', function() {
 		(function() {
 			var e = new Edge('spring', 'xxxxx', uuid.v4());
-		}).should.throw('`a` must be a valid, type 4 UUID');
+		}).should.throw('`a` must be a type 4 UUID');
 	});
 
-	it('should cause an error if the second vertex id is invalid', function() {
+	it('`b` must be a type 4 UUID', function() {
 		(function() {
 			var e = new Edge('spring', uuid.v4(), 'xxxxx');
-		}).should.throw('`b` must be a valid, type 4 UUID');
+		}).should.throw('`b` must be a type 4 UUID');
 	});
 
-	it('should cause an error if the length is not numeric', function() {
+	it('`length` must be a number', function() {
 		(function() {
 			var e = new Edge('spring', uuid.v4(), uuid.v4(), null);
-		}).should.throw('`length` must be numeric');
+		}).should.throw('`length` must be a number');
 	});
 
-	it('should cause an error if the amplitude is invalid', function() {
+	it('`amplitude` must be a number', function() {
 		(function() {
 			var e = new Edge('muscle', uuid.v4(), uuid.v4(), 0, null, 0);
 		}).should.throw('`amplitude` must be a number between 0 and 1 (inclusive)');
 	});
 
-	it('should cause an error if the phase is invalid', function() {
+	it('`phase` must be a number', function() {
 		(function() {
 			var e = new Edge('muscle', uuid.v4(), uuid.v4(), 0, 0, null);
 		}).should.throw('`phase` must be a number between 0 and 1 (inclusive)');
 	});
 
-	describe('#springify', function() {
+	describe('#springify()', function() {
 
-		it('should change the type to spring and delete amplitude and velocity', function() {
+		it('should change the type to "spring" and delete `amplitude` and `velocity`', function() {
 			var e = new Edge('muscle', uuid.v4(), uuid.v4(), 0, 0, 0);
 			e.springify();
 			e.type.should.equal('spring');
@@ -53,9 +53,9 @@ describe('Edge', function() {
 
 	});
 
-	describe('#musclize', function() {
+	describe('#musclize()', function() {
 
-		it('should change the type to muscle and create amplitude and velocity', function() {
+		it('should change the `type` to "muscle" and create `amplitude` and `velocity`', function() {
 			var e = new Edge('spring', uuid.v4(), uuid.v4(), 0, 0, 0);
 			e.musclize(0, 0);
 			e.type.should.equal('muscle');

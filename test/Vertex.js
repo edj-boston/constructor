@@ -5,39 +5,39 @@ var should = require('should'),
 
 describe('Vertex', function() {
 
-	it('should thow an error for an invalid type', function() {
+	it('`type` must be a certain string', function() {
 		(function() {
 			var v = new Vertex(null);
-		}).should.throw('Invalid type');
+		}).should.throw('Invalid `type`');
 	});
 
-	it('should thow an error for an invalid x coordinate', function() {
+	it('`x` must be a number', function() {
 		(function() {
 			var v = new Vertex('free', null);
-		}).should.throw('x must be a numeric value');
+		}).should.throw('`x` must be a number');
 	});
 
-	it('should thow an error for an invalid y coordinate', function() {
+	it('`y` must be a number', function() {
 		(function() {
 			var v = new Vertex('free', 0, null);
-		}).should.throw('y must be a numeric value');
+		}).should.throw('`y` must be a number');
 	});
 
-	it('should cause an error if the x velocity is invalid', function() {
+	it('`vx` must be a number', function() {
 		(function() {
 			var v = new Vertex('free', 0, 0, null);
-		}).should.throw('Numeric x velocity is required');
+		}).should.throw('`vx` must be a number');
 	});
 
-	it('should cause an error if the y velocity is invalid', function() {
+	it('`vy` must be a number', function() {
 		(function() {
 			var v = new Vertex('free', 0, 0, 0, null);
-		}).should.throw('Numeric y velocity is required');
+		}).should.throw('`vy` must be a number');
 	});
 
 	describe('#free()', function() {
 
-		it('should change the type to free and create velocities', function() {
+		it('should change the `type` to "free" and create `vx` and `vy`', function() {
 			var v = new Vertex('fixed', 0, 0);
 			v.free(0, 0);
 			v.type.should.equal('free');
@@ -49,7 +49,7 @@ describe('Vertex', function() {
 
 	describe('#fix()', function() {
 
-		it('should change the type to fixed and destroy velocities', function() {
+		it('should change the `type` to "fixed" and destroy `vx` and `vy`', function() {
 			var v = new Vertex('free', 0, 0, 0, 0);
 			v.fix();
 			v.type.should.equal('fixed');

@@ -17,16 +17,16 @@ var Edge = function(type, a, b, length, amplitude, phase) {
 
 Edge.prototype.validate = function(val) {
 	// Validate the type
-	if( this.type != 'muscle' && this.type != 'spring' ) throw new Error('Invalid type');
+	if( this.type != 'muscle' && this.type != 'spring' ) throw new Error('Invalid `type`');
 
 	// Validate the first vertex id
-	if( !validateUUID(this.a) ) throw new Error('`a` must be a valid, type 4 UUID');
+	if( !validateUUID(this.a) ) throw new Error('`a` must be a type 4 UUID');
 
 	// Validate the second vertex id
-	if( !validateUUID(this.b) ) throw new Error('`b` must be a valid, type 4 UUID');
+	if( !validateUUID(this.b) ) throw new Error('`b` must be a type 4 UUID');
 
 	// Validate the length
-	if( typeof this.length != 'number' ) throw new Error('`length` must be numeric');
+	if( typeof this.length != 'number' ) throw new Error('`length` must be a number');
 
 	if( this.type == 'muscle' ) {
 		if( typeof this.amplitude != 'number' || this.amplitude < 0  || this.amplitude > 1 ) {
