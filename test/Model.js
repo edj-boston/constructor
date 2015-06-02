@@ -71,6 +71,13 @@ describe('Model', function() {
 		}).should.throw('`k` must be a number between 0 and 1 (inclusive)');
 	});
 
+	it('`reflection` must be a number between 0 and 1 (inclusive)', function() {
+		(function() {
+			var m1 = new Model({ name: 'm1', reflection: -1 });
+			var m2 = new Model({ name: 'm2', reflection: 1.5 });
+		}).should.throw('`reflection` must be a number between 0 and 1 (inclusive)');
+	});
+
 	describe('#vertices', function() {
 
 		it('can be empty', function() {

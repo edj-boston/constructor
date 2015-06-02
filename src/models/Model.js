@@ -69,6 +69,12 @@ Model.prototype.validate = function() {
 	if( this.k < 0 || this.k > 1 ) {
 		throw new Error('`k` must be a number between 0 and 1 (inclusive)');
 	}
+
+	// Validate the reflection value
+	if( this.reflection < 0 || this.reflection > 1 ) {
+		throw new Error('`reflection` must be a number between 0 and 1 (inclusive)');
+	}
+
 }
 
 module.exports = Model;
