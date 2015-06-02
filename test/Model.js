@@ -78,6 +78,13 @@ describe('Model', function() {
 		}).should.throw('`reflection` must be a number between 0 and 1 (inclusive)');
 	});
 
+	it('`amplitude` must be a number between 0 and 1 (inclusive)', function() {
+		(function() {
+			var m1 = new Model({ name: 'm1', amplitude: -1 });
+			var m2 = new Model({ name: 'm2', amplitude: 1.5 });
+		}).should.throw('`amplitude` must be a number between 0 and 1 (inclusive)');
+	});
+
 	describe('#vertices', function() {
 
 		it('can be empty', function() {
@@ -88,7 +95,7 @@ describe('Model', function() {
 	});
 
 
-	describe('edges', function() {
+	describe('#edges', function() {
 
 		it('can be empty', function() {
 			var m = new Model({ name: 'm' });

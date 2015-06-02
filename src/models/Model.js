@@ -75,6 +75,11 @@ Model.prototype.validate = function() {
 		throw new Error('`reflection` must be a number between 0 and 1 (inclusive)');
 	}
 
+	// Validate the amplitude value
+	if( this.amplitude < 0 || this.amplitude > 1 ) {
+		throw new Error('`amplitude` must be a number between 0 and 1 (inclusive)');
+	}
+
 }
 
 module.exports = Model;
