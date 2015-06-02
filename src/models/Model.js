@@ -28,7 +28,6 @@ Model.prototype.defaults = {
 	k			: 0,
 	reflection	: 0,
 	amplitude	: 0,
-	direction	: 1,
 	phase		: 0,
 	speed		: 0,
 	width		: 1,
@@ -78,6 +77,11 @@ Model.prototype.validate = function() {
 	// Validate the amplitude value
 	if( this.amplitude < 0 || this.amplitude > 1 ) {
 		throw new Error('`amplitude` must be a number between 0 and 1 (inclusive)');
+	}
+
+	// Validate the phase value
+	if( this.phase < 0 || this.phase > 1 ) {
+		throw new Error('`phase` must be a number between 0 and 1 (inclusive)');
 	}
 
 }

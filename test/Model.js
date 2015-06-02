@@ -85,6 +85,13 @@ describe('Model', function() {
 		}).should.throw('`amplitude` must be a number between 0 and 1 (inclusive)');
 	});
 
+	it('`phase` must be a number between 0 and 1 (inclusive)', function() {
+		(function() {
+			var m1 = new Model({ name: 'm1', phase: -1 });
+			var m2 = new Model({ name: 'm2', phase: 1.5 });
+		}).should.throw('`phase` must be a number between 0 and 1 (inclusive)');
+	});
+
 	describe('#vertices', function() {
 
 		it('can be empty', function() {
