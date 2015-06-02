@@ -84,6 +84,11 @@ Model.prototype.validate = function() {
 		throw new Error('`phase` must be a number between 0 and 1 (inclusive)');
 	}
 
+	// Validate the speed value
+	if( this.speed < -1  || this.speed > 1 ) {
+		throw new Error('`speed` must be a number between -1 and 1 (inclusive)');
+	}
+
 }
 
 module.exports = Model;

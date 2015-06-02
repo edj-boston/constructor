@@ -39,7 +39,7 @@ describe('Model', function() {
 		}).should.throw('`f` must be a number between 0 and 1 (inclusive)');
 	});
 
-	it('`g` must be greater than or equal to -1', function() {
+	it('`g` must be a number between -1 and 1 (inclusive)', function() {
 		(function() {
 			var m1 = new Model({ name: 'm1', g: -1.5 });
 			var m2 = new Model({ name: 'm2', g: 1.5 });
@@ -92,6 +92,13 @@ describe('Model', function() {
 		}).should.throw('`phase` must be a number between 0 and 1 (inclusive)');
 	});
 
+	it('`speed` must be a number between -1 and 1 (inclusive)', function() {
+		(function() {
+			var m1 = new Model({ name: 'm1', speed: -1.5 });
+			var m2 = new Model({ name: 'm2', speed: 1.5 });
+		}).should.throw('`speed` must be a number between -1 and 1 (inclusive)');
+	});
+
 	describe('#vertices', function() {
 
 		it('can be empty', function() {
@@ -100,7 +107,6 @@ describe('Model', function() {
 		});
 
 	});
-
 
 	describe('#edges', function() {
 
