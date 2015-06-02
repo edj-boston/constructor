@@ -89,6 +89,11 @@ Model.prototype.validate = function() {
 		throw new Error('`speed` must be a number between -1 and 1 (inclusive)');
 	}
 
+	// Validate the width value
+	if( this.width <= 0 ) {
+		throw new Error('`width` must be a number greater than 0');
+	}
+
 }
 
 module.exports = Model;

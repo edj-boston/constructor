@@ -99,6 +99,18 @@ describe('Model', function() {
 		}).should.throw('`speed` must be a number between -1 and 1 (inclusive)');
 	});
 
+	it('`width` must be a number', function() {
+		(function() {
+			var m = new Model({ name: 'm', width: "string" });
+		}).should.throw('`width` must be a number');
+	});
+
+	it('`width` must be greater than 0', function() {
+		(function() {
+			var m = new Model({ name: 'm', width: -1 });
+		}).should.throw('`width` must be a number greater than 0');
+	});
+
 	describe('#vertices', function() {
 
 		it('can be empty', function() {
