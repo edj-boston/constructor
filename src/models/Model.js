@@ -1,5 +1,7 @@
-var uuid = require('uuid'),
-	validateUUID = require('../../lib/validateUUID.js');
+var Edge = require('../../src/models/Edge.js'),
+	uuid = require('uuid'),
+	validateUUID = require('../../lib/validateUUID.js'),
+	Vertex = require('../../src/models/Vertex.js');
 
 
 var Model = function(options) {
@@ -16,6 +18,7 @@ var Model = function(options) {
 	this.validate();
 
 	return this;
+
 }
 
 Model.prototype.defaults = {
@@ -94,6 +97,37 @@ Model.prototype.validate = function() {
 		throw new Error('`width` must be a number greater than 0');
 	}
 
-}
+	//
+	for(id in this.edges) {
+		if( !this.vertices.hasOwnProperty(this.edges[id].a) || !this.vertices.hasOwnProperty(this.edges[id].b) ) {
+			throw new Error('Vertex passed to Edge constructor not found in vertices property');
+		}
+	}
+
+};
+
+Model.prototype.addVertex = function(type, x, y, vx, vy) {
+
+	var id = uuid.v4();
+	var vertex = new Vertex(type, x, y, vx, vy);
+
+	this.vertices[id] = vertex;
+
+	return id;
+
+};
+
+Model.prototype.addEdge = function(type, a, b, length, amplitude, phase) {
+
+	var id = uuid.v4();
+	var edge = new Edge(type, a, b, length, amplitude, phase);
+
+	this.edges[id] = edge;
+
+	this.validate();
+
+	return id;
+
+};
 
 module.exports = Model;

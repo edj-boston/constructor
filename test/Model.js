@@ -1,7 +1,8 @@
 var assert = require('assert'),
 	should = require('should'),
 	Model = require('../src/models/Model.js'),
-	uuid = require('uuid');
+	uuid = require('uuid'),
+	validateUUID = require('../lib/validateUUID.js');
 
 
 describe('Model', function() {
@@ -160,6 +161,37 @@ describe('Model', function() {
 		(function() {
 			var m = new Model({ name: 'm', width: -1 });
 		}).should.throw('`width` must be a number greater than 0');
+	});
+
+	describe('#addVertex', function() {
+
+		it('should return a type 4 UUID', function() {
+			var m = new Model({ name: 'm' });
+			var id = m.addVertex('free', 0, 0, 0, 0);
+			assert.equal(validateUUID(id), true);
+		});
+
+	});
+
+	describe('#addEdge', function() {
+
+		it('should return a type 4 UUID', function() {
+			var m = new Model({ name: 'm' });
+			var a = m.addVertex('free', 0, 0, 0, 0);
+			var b = m.addVertex('free', 0, 0, 0, 0);
+			var id = m.addEdge('spring', a, b, 0);
+			assert.equal(validateUUID(id), true);
+		});
+
+		it('should validate the passed vertices', function() {
+			(function() {
+				var m = new Model({ name: 'm' });
+				var a = m.addVertex('free', 0, 0, 0, 0);
+				var b = 'de305d54-75b4-431b-adb2-eb6b9e546014';
+				var id = m.addEdge('spring', a, b, 0);
+			}).should.throw('Vertex passed to Edge constructor not found in vertices property');
+		});
+
 	});
 
 });
