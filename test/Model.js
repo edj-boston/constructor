@@ -8,9 +8,20 @@ describe('Model', function() {
 
 	it('The options argument is required', function() {
 		(function() {
-			var m1 = new Model();
-			var m2 = new Model(null);
+			var m = new Model();
 		}).should.throw('You must pass an options object');
+	});
+
+	it('`amplitude` must be greater than or equal to 0', function() {
+		(function() {
+			var m = new Model({ name: 'm', amplitude: -1 });
+		}).should.throw('`amplitude` must be a number between 0 and 1 (inclusive)');
+	});
+
+	it('`amplitude` must be less than or equal to 1', function() {
+		(function() {
+			var m = new Model({ name: 'm', amplitude: 1.5 });
+		}).should.throw('`amplitude` must be a number between 0 and 1 (inclusive)');
 	});
 
 	it('`autoReverse` must be a boolean', function() {
@@ -21,28 +32,40 @@ describe('Model', function() {
 
 	it('`comment` must be a string', function() {
 		(function() {
-			var m1 = new Model({ name: 'm1' });
-			var m2 = new Model({ name: 'm2', comment: null });
+			var m = new Model({ name: 'm', comment: null });
 		}).should.throw('`comment` must be a string');
 	});
 
-	it('`name` length must be greater than 1', function() {
-		(function() {
-			var m = new Model({ name: '' });
-		}).should.throw('`name` length must be greater than 1');
+	describe('#edges', function() {
+
+		it('can be empty', function() {
+			var m = new Model({ name: 'm' });
+			assert.equal(Object.keys(m.edges).length, 0);
+		});
+
 	});
 
 	it('`f` must be greater than or equal to 0', function() {
 		(function() {
-			var m1 = new Model({ name: 'm1', f: -1 });
-			var m2 = new Model({ name: 'm2', f: 1.5 });
+			var m = new Model({ name: 'm', f: -1 });
 		}).should.throw('`f` must be a number between 0 and 1 (inclusive)');
 	});
 
-	it('`g` must be a number between -1 and 1 (inclusive)', function() {
+	it('`f` must be less than or equal to 1', function() {
 		(function() {
-			var m1 = new Model({ name: 'm1', g: -1.5 });
-			var m2 = new Model({ name: 'm2', g: 1.5 });
+			var m = new Model({ name: 'm', f: 1.5 });
+		}).should.throw('`f` must be a number between 0 and 1 (inclusive)');
+	});
+
+	it('`g` must be greater than or equal to -1', function() {
+		(function() {
+			var m = new Model({ name: 'm', g: -1.5 });
+		}).should.throw('`g` must be a number between -1 and 1 (inclusive)');
+	});
+
+	it('`g` must be less than or equal to 1', function() {
+		(function() {
+			var m = new Model({ name: 'm', g: 1.5 });
 		}).should.throw('`g` must be a number between -1 and 1 (inclusive)');
 	});
 
@@ -58,45 +81,73 @@ describe('Model', function() {
 		}).should.throw('`height` must be a number greater than 0');
 	});
 
+	it('`k` must be greater than or equal to 0', function() {
+		(function() {
+			var m = new Model({ name: 'm', k: -1 });
+		}).should.throw('`k` must be a number between 0 and 1 (inclusive)');
+	});
+
+	it('`k` must be less than or equal to 1', function() {
+		(function() {
+			var m = new Model({ name: 'm', k: 1.5 });
+		}).should.throw('`k` must be a number between 0 and 1 (inclusive)');
+	});
+
 	it('`name` must be a string', function() {
 		(function() {
 			var m = new Model({ name: null });
 		}).should.throw('`name` must be a string');
 	});
 
-	it('`k` must be a number between 0 and 1 (inclusive)', function() {
+	it('`name` length must be greater than 1', function() {
 		(function() {
-			var m1 = new Model({ name: 'm1', k: -1 });
-			var m2 = new Model({ name: 'm2', k: 1.5 });
-		}).should.throw('`k` must be a number between 0 and 1 (inclusive)');
+			var m = new Model({ name: '' });
+		}).should.throw('`name` length must be greater than 1');
 	});
 
-	it('`reflection` must be a number between 0 and 1 (inclusive)', function() {
+	it('`reflection` must be greater than or equal to 0', function() {
 		(function() {
-			var m1 = new Model({ name: 'm1', reflection: -1 });
-			var m2 = new Model({ name: 'm2', reflection: 1.5 });
+			var m = new Model({ name: 'm', reflection: -1 });
 		}).should.throw('`reflection` must be a number between 0 and 1 (inclusive)');
 	});
 
-	it('`amplitude` must be a number between 0 and 1 (inclusive)', function() {
+	it('`reflection` must be less than or equal to 1', function() {
 		(function() {
-			var m1 = new Model({ name: 'm1', amplitude: -1 });
-			var m2 = new Model({ name: 'm2', amplitude: 1.5 });
-		}).should.throw('`amplitude` must be a number between 0 and 1 (inclusive)');
+			var m = new Model({ name: 'm', reflection: 1.5 });
+		}).should.throw('`reflection` must be a number between 0 and 1 (inclusive)');
 	});
 
-	it('`phase` must be a number between 0 and 1 (inclusive)', function() {
+	it('`phase` must be greater than or equal to 0', function() {
 		(function() {
-			var m1 = new Model({ name: 'm1', phase: -1 });
-			var m2 = new Model({ name: 'm2', phase: 1.5 });
+			var m = new Model({ name: 'm', phase: -1 });
 		}).should.throw('`phase` must be a number between 0 and 1 (inclusive)');
 	});
 
-	it('`speed` must be a number between -1 and 1 (inclusive)', function() {
+	it('`phase` must be less than or equal to 1', function() {
+		(function() {
+			var m = new Model({ name: 'm', phase: 1.5 });
+		}).should.throw('`phase` must be a number between 0 and 1 (inclusive)');
+	});
+
+	it('`speed` must be greater than or equal to -1', function() {
 		(function() {
 			var m1 = new Model({ name: 'm1', speed: -1.5 });
-			var m2 = new Model({ name: 'm2', speed: 1.5 });
 		}).should.throw('`speed` must be a number between -1 and 1 (inclusive)');
+	});
+
+	it('`speed` must be less than or equal to 1', function() {
+		(function() {
+			var m = new Model({ name: 'm', speed: 1.5 });
+		}).should.throw('`speed` must be a number between -1 and 1 (inclusive)');
+	});
+
+	describe('#vertices', function() {
+
+		it('can be empty', function() {
+			var m = new Model({ name: 'm' });
+			assert.equal(Object.keys(m.vertices).length, 0);
+		});
+
 	});
 
 	it('`width` must be a number', function() {
@@ -111,21 +162,4 @@ describe('Model', function() {
 		}).should.throw('`width` must be a number greater than 0');
 	});
 
-	describe('#vertices', function() {
-
-		it('can be empty', function() {
-			var m = new Model({ name: 'm' });
-			assert.equal(Object.keys(m.vertices).length, 0);
-		});
-
-	});
-
-	describe('#edges', function() {
-
-		it('can be empty', function() {
-			var m = new Model({ name: 'm' });
-			assert.equal(Object.keys(m.edges).length, 0);
-		});
-
-	});
 });

@@ -19,20 +19,20 @@ var Model = function(options) {
 }
 
 Model.prototype.defaults = {
+	amplitude	: 0,
 	autoReverse	: true,
 	comment		: '',
+	edges		: {},
 	f			: 0,
 	g			: 0,
 	height		: 1,
-	name		: '',
 	k			: 0,
 	reflection	: 0,
-	amplitude	: 0,
+	name		: '',
 	phase		: 0,
 	speed		: 0,
-	width		: 1,
-	edges		: {},
-	vertices	: {}
+	vertices	: {},
+	width		: 1
 };
 
 Model.prototype.validate = function() {
@@ -44,9 +44,9 @@ Model.prototype.validate = function() {
 		}
 	}
 
-	// Comment must be a string of some length
-	if( this.name.length < 1) {
-		throw new Error('`name` length must be greater than 1');
+	// Validate the amplitude value
+	if( this.amplitude < 0 || this.amplitude > 1 ) {
+		throw new Error('`amplitude` must be a number between 0 and 1 (inclusive)');
 	}
 
 	// Validate the f value
@@ -69,19 +69,19 @@ Model.prototype.validate = function() {
 		throw new Error('`k` must be a number between 0 and 1 (inclusive)');
 	}
 
-	// Validate the reflection value
-	if( this.reflection < 0 || this.reflection > 1 ) {
-		throw new Error('`reflection` must be a number between 0 and 1 (inclusive)');
-	}
-
-	// Validate the amplitude value
-	if( this.amplitude < 0 || this.amplitude > 1 ) {
-		throw new Error('`amplitude` must be a number between 0 and 1 (inclusive)');
+	// Name must be a string of some length
+	if( this.name.length < 1) {
+		throw new Error('`name` length must be greater than 1');
 	}
 
 	// Validate the phase value
 	if( this.phase < 0 || this.phase > 1 ) {
 		throw new Error('`phase` must be a number between 0 and 1 (inclusive)');
+	}
+
+	// Validate the reflection value
+	if( this.reflection < 0 || this.reflection > 1 ) {
+		throw new Error('`reflection` must be a number between 0 and 1 (inclusive)');
 	}
 
 	// Validate the speed value
