@@ -97,7 +97,7 @@ Model.prototype.validate = function() {
 		throw new Error('`width` must be a number greater than 0');
 	}
 
-	//
+	// Check to make sure that vertices referenced in edges are present
 	for(id in this.edges) {
 		if( !this.vertices.hasOwnProperty(this.edges[id].a) || !this.vertices.hasOwnProperty(this.edges[id].b) ) {
 			throw new Error('Vertex passed to Edge constructor not found in vertices property');
@@ -114,6 +114,25 @@ Model.prototype.addVertex = function(type, x, y, vx, vy) {
 	this.vertices[id] = vertex;
 
 	return id;
+
+};
+
+Model.prototype.deleteVertex = function(id) {
+
+	if( this.vertices.hasOwnProperty(id) ) {
+		delete this.vertices[id];
+	} else {
+		throw new Error('Cannot delete vertex because the id was not found');
+	}
+
+	// Delete any edges that reference this vertex
+	for(edgeId in this.edges) {
+		if( this.edges[edgeId].a == id || this.edges[edgeId].b == id ) {
+			delete this.edges[edgeId];
+		}
+	}
+
+	return true;
 
 };
 

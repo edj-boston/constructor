@@ -173,6 +173,34 @@ describe('Model', function() {
 
 	});
 
+	describe('#deleteVertex', function() {
+
+		it('should throw an error for an non-existent vertex', function() {
+			(function() {
+				var m = new Model({ name: 'm' });
+				var id = m.addVertex('free', 0, 0, 0, 0);
+				m.deleteVertex('xxxxxx');
+			}).should.throw('Cannot delete vertex because the id was not found');
+		});
+
+		it('should delete the vertex', function() {
+			var m = new Model({ name: 'm' });
+			var a = m.addVertex('free', 0, 0, 0, 0);
+			m.deleteVertex(a);
+			assert.equal(m.vertices.hasOwnProperty(a) , false);
+		});
+
+		it('should also delete any edges that reference the vertex', function() {
+			var m = new Model({ name: 'm' });
+			var a = m.addVertex('free', 0, 0, 0, 0);
+			var b = m.addVertex('free', 0, 0, 0, 0);
+			var e = m.addEdge('spring', a, b, 0);
+			m.deleteVertex(a);
+			assert.equal(m.edges.hasOwnProperty(e) , false);
+		});
+
+	});
+
 	describe('#addEdge', function() {
 
 		it('should return a type 4 UUID', function() {
