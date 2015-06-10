@@ -1,0 +1,16 @@
+{
+	"amplitude"		: 0,
+	"autoReverse"	: true,
+	"comment"		: "",
+	"edges"			: {},
+	"f"				: 0,
+	"g"				: 0,
+	"height"		: 1,
+	"k"				: 0,
+	"reflection"	: 0,
+	"name"			: "model",
+	"phase"			: 0,
+	"speed"			: 0,
+	"vertices"		: {},
+	"width"			: 1
+}

@@ -5,13 +5,9 @@ var Model = require('../../src/models/Model.js'),
 
 var Constructor = function(options) {
 
-	if( typeof options == 'undefined' || options == null) {
-		throw new Error('You must pass an options object');
-	}
-
 	// Populate this with defaults or options
 	for( prop in this.defaults) {
-		this[prop] = options.hasOwnProperty(prop) ? options[prop] : this.defaults[prop];
+		this[prop] = ( options && options.hasOwnProperty(prop) ) ? options[prop] : this.defaults[prop];
 	}
 
 	this.validate();
@@ -33,6 +29,16 @@ Constructor.prototype.validate = function() {
 			throw new Error('`' + prop + '` must be a ' + typeof this.defaults[prop]);
 		}
 	}
+
+}
+
+Constructor.prototype.loadJSON = function(json) {
+
+	var obj = JSON.parse(json);
+
+	this.model = new Model(obj);
+
+	return this;
 
 }
 
