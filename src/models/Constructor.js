@@ -17,8 +17,9 @@ var Constructor = function(options) {
 }
 
 Constructor.prototype.defaults = {
-	model		: {},
-	models		: []
+	animate	: false,
+	model	: {},
+	models	: []
 };
 
 Constructor.prototype.validate = function() {
@@ -30,6 +31,26 @@ Constructor.prototype.validate = function() {
 		}
 	}
 
+}
+
+Constructor.prototype.loop = function() {
+
+	this.animate = true;
+
+	// Gravity
+	for( id in this.model.vertices ) {
+		this.model.vertices[id].y += this.model.g;
+	}
+
+	return this;
+
+}
+
+Constructor.prototype.stop = function() {
+
+	this.animate = false;
+
+	return this;
 }
 
 Constructor.prototype.loadModel = function(arg) {
@@ -72,7 +93,7 @@ Constructor.prototype.loadModelObject = function(obj) {
 	}
 
 	this.model = new Model(obj);
-
+console.log(this.model);
 	return this;
 
 }

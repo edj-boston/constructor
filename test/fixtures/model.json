@@ -4,13 +4,15 @@
 	"comment"		: "",
 	"edges"			: {},
 	"f"				: 0,
-	"g"				: 0,
+	"g"				: -0.02324340,
 	"height"		: 1,
 	"k"				: 0,
 	"reflection"	: 0,
 	"name"			: "model",
 	"phase"			: 0,
 	"speed"			: 0,
-	"vertices"		: {},
+	"vertices"		: {
+		"22317dad-d776-478c-a068-4a21b91e662f" : { "x": 100, "y": 100 }
+	},
 	"width"			: 1
 }
